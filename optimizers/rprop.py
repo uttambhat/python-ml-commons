@@ -13,7 +13,7 @@ def rprop(objective_function,theta_initial,bounds):
     gradient_previous=np.copy(gradient)
     count=0
     
-    while(np.linalg.norm(delta_theta)>precision and count<10):
+    while(np.linalg.norm(delta_theta)>precision and count<10000):
         (value,gradient)=objective_function(theta)
         
         for i in range(theta.shape[0]):
@@ -25,4 +25,6 @@ def rprop(objective_function,theta_initial,bounds):
         theta=theta+delta_theta
         #print(theta,gradient,step_size)
         count += 1
+        if count%100==0:
+            print("Rprop iteration: ",count)
     return theta
